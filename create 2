@@ -1,0 +1,16 @@
+#클래스-오브젝트 연습 : BanG!_Dream의 각 캐릭터 자기소개를 하는 프로그램을 짜보자
+class BanG: #BanG 클래스 선언
+    def __init__(self, name, band_name, position):
+        self.name = name
+        self.band_name = band_name
+        self.position = position
+    
+    def intro_kr(self):
+        print(f'{self.name} : 「안녕! 내 이름은 {self.name}! {self.band_name}에서 {self.position}담당이지!」')
+    def intro_jp(self):
+        print(f'{self.name} : 「はじめまして! 私の名前は{self.name}! {self.band_name}で{self.position}をやっています!」')
+
+아오바_모카 = BanG("아오바 모카", "Afterglow", "기타" )
+아오바_모카.intro_kr() #BanG클래스에서 변수와 intro함수를 받았다
+青葉モカ = BanG("青葉モカ", "Afterglow", "ギター")
+青葉モカ.intro_jp()
