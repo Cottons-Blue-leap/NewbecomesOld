@@ -1,0 +1,12 @@
+# Number extractor for Lottery in Korea
+
+import random
+
+num = []
+for i in range(45):
+    num.append(i)
+
+Lotto = random.sample(num, 6)
+Lotto_in_order = sorted(Lotto)
+
+print(Lotto_in_order)
