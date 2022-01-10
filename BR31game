@@ -1,0 +1,38 @@
+# 플레이어 A와 B가 k개만큼의 돌을 가지고 게임을 한다.
+# 마지막 돌을 가져가는 사람이 이기는 게임으로,
+# 플레이어는 턴마다 1개~l개만큼의 돌을 가져가야 한다. 룰을 어기면 바로 다음 상대 턴으로 넘어간다
+# 다중 반복문을 사용하여 작성가능하다
+# stonegame(k, l)로 게임함수를 만들자
+
+def stonegame(k, l):
+    while k > 0:
+        A = int(input(f'A는 얼마나 가져갈 거임? : '))
+        T = -1 # 순서 : T = -1일때 A, T = 1일때 B
+        while T == -1:
+            if A <= l and A >= 1:
+                k -= A
+                print(f'돌 {k}개 남음')
+                T = T * -1
+            else:
+                print(f'***1개에서 {l}개까지만 가져가셈***')
+                break
+                
+        if k <= 0:
+            print('플레이어 A가 이겼따')
+            
+        
+        B = int(input(f'B는 얼마나 가져갈 거임? : '))
+        while T == 1:
+            if B <= l and B >= 1:
+                k -= B
+                print(f'돌 {k}개 남음')
+                T = T * -1
+            else:
+                print(f'***1개에서 {l}개까지만 가져가셈***')
+                break
+                
+        if k <= 0:
+            print('플레이어 B가 이겼따')
+
+        
+stonegame(31, 3)
