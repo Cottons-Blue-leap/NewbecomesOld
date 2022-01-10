@@ -1,0 +1,395 @@
+# BanG Dream! 가장 적은 돈을 남기고 과금하는 방법
+# 1 과금상품 딕셔너리 생성
+# 2 예산을 입력한다. 입력한 예산을 초과하지 않는 선에서 가장 효율적인 월 과금 플랜을 print한다
+# 스타A, 스타B, 스타C, 스타D, 스타E, 스타G는 중복구매가 가능하다
+
+# 1 과금상품 딕셔너리 생성. name(key):efficiency per 1 Won(value)
+Bang = {'햎박': '3000/11000', '세트': '1960/22000', '스타A': '60/1100', '스타B': '360/4500', '스타C': '760/9000', '스타D': '1300/15000', '스타E': '2650/30500', '스타F': '4200/47500', '스타G': '8500/95000'}
+
+keys_lst = list(Bang.keys()) # 딕셔너리의 키를 리스트로 생성
+values_lst = list(Bang.values()) # 딕셔너리의 값들을 리스트로 생성
+l = len(values_lst)
+
+num_stars = []
+num_money = []
+
+for i in range(0, l): # 딕셔너리의 값 중 star와 money를 분리하여 각 리스트 생성
+    value = values_lst[i]
+    value_lst = value.split('/')
+    num_stars.append(int(value_lst[0]))
+    num_money.append(int(value_lst[1]))
+    
+num_stars_sorted = sorted(num_stars)
+num_money_sorted = sorted(num_money) # 오름차순으로 정렬
+
+key_dict = {}
+for i in range(len(keys_lst)):
+    key_dict[f'{i+1}번'] = keys_lst[i]
+print(key_dict)
+        
+
+b = int(input('예산 : ')) # 예산 입력
+
+
+if b < num_money_sorted[0]:
+    print(f'human...현질을 위해선 최소 {num_money_sorted[0]}원의 금액이 필요합니다...')
+
+
+elif b >= num_money_sorted[0] and b < num_money_sorted[1]: # 0에서 1까지
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 상품선택횟수
+    price = num_money_sorted[0] * t0
+    stars = num_stars_sorted[0] * t0
+
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+                plan[f'{i+1}번'] = t0
+                
+            
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+
+
+elif b >= num_money_sorted[1] and b < num_money_sorted[2]: # 1에서 2까지
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+                
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+
+
+elif b >= num_money_sorted[2] and b < num_money_sorted[3]: # 2에서 3까지
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+    
+
+elif b >= num_money_sorted[3] and b < num_money_sorted[4]: # 3에서 4까지
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+
+
+elif b >= num_money_sorted[4] and b < num_money_sorted[5]: # 4에서 5까지
+    t4 = 0
+    while b >= num_money_sorted[4]:
+        b = b - num_money_sorted[4]
+        t4 = t4 + 1 # 인덱스 2의 상품선택횟수
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3 + num_money_sorted[4] * t4
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3 + num_stars_sorted[4] * t4
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+        elif num_money_sorted[4] == num_money[i]:
+            plan[f'{i+1}번'] = t4
+
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+    
+    
+elif b >= num_money_sorted[5] and b < num_money_sorted[6]: # 5에서 6까지
+    t5 = 0
+    while b >= num_money_sorted[5]:
+        b = b - num_money_sorted[5]
+        t5 = t5 + 1 # 인덱스 2의 상품선택횟수
+    t4 = 0
+    while b >= num_money_sorted[4]:
+        b = b - num_money_sorted[4]
+        t4 = t4 + 1 # 인덱스 2의 상품선택횟수
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3 + num_money_sorted[4] * t4 + num_money_sorted[5] * t5
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3 + num_stars_sorted[4] * t4 + num_stars_sorted[5] * t5
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+        elif num_money_sorted[4] == num_money[i]:
+            plan[f'{i+1}번'] = t4
+        elif num_money_sorted[5] == num_money[i]:
+            plan[f'{i+1}번'] = t5
+
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+    
+elif b >= num_money_sorted[6] and b < num_money_sorted[7]: # 6에서 7까지
+    t6 = 0
+    while b >= num_money_sorted[6]:
+        b = b - num_money_sorted[6]
+        t6 = t6 + 1 # 인덱스 2의 상품선택횟수
+    t5 = 0
+    while b >= num_money_sorted[5]:
+        b = b - num_money_sorted[5]
+        t5 = t5 + 1 # 인덱스 2의 상품선택횟수
+    t4 = 0
+    while b >= num_money_sorted[4]:
+        b = b - num_money_sorted[4]
+        t4 = t4 + 1 # 인덱스 2의 상품선택횟수
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3 + num_money_sorted[4] * t4 + num_money_sorted[5] * t5 + num_money_sorted[6] * t6
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3 + num_stars_sorted[4] * t4 + num_stars_sorted[5] * t5 + num_stars_sorted[6] * t6
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+        elif num_money_sorted[4] == num_money[i]:
+            plan[f'{i+1}번'] = t4
+        elif num_money_sorted[5] == num_money[i]:
+            plan[f'{i+1}번'] = t5
+        elif num_money_sorted[6] == num_money[i]:
+            plan[f'{i+1}번'] = t6
+
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+    
+    
+elif b >= num_money_sorted[7] and b < num_money_sorted[8]: # 7에서 8까지
+    t7 = 0
+    while b >= num_money_sorted[7]:
+        b = b - num_money_sorted[7]
+        t7 = t7 + 1 # 인덱스 2의 상품선택횟수
+    t6 = 0
+    while b >= num_money_sorted[6]:
+        b = b - num_money_sorted[6]
+        t6 = t6 + 1 # 인덱스 2의 상품선택횟수
+    t5 = 0
+    while b >= num_money_sorted[5]:
+        b = b - num_money_sorted[5]
+        t5 = t5 + 1 # 인덱스 2의 상품선택횟수
+    t4 = 0
+    while b >= num_money_sorted[4]:
+        b = b - num_money_sorted[4]
+        t4 = t4 + 1 # 인덱스 2의 상품선택횟수
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3 + num_money_sorted[4] * t4 + num_money_sorted[5] * t5 + num_money_sorted[6] * t6 + num_money_sorted[7] * t7
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3 + num_stars_sorted[4] * t4 + num_stars_sorted[5] * t5 + num_stars_sorted[6] * t6 + num_stars_sorted[7] * t7
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+        elif num_money_sorted[4] == num_money[i]:
+            plan[f'{i+1}번'] = t4
+        elif num_money_sorted[5] == num_money[i]:
+            plan[f'{i+1}번'] = t5
+        elif num_money_sorted[6] == num_money[i]:
+            plan[f'{i+1}번'] = t6
+        elif num_money_sorted[7] == num_money[i]:
+            plan[f'{i+1}번'] = t7
+            
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
+    
+    
+elif b >= num_money_sorted[8]: # 8이상~
+    t8 = 0
+    while b >= num_money_sorted[8]:
+        b = b - num_money_sorted[8]
+        t8 = t8 + 1 # 인덱스 2의 상품선택횟수
+    t7 = 0
+    while b >= num_money_sorted[7]:
+        b = b - num_money_sorted[7]
+        t7 = t7 + 1 # 인덱스 2의 상품선택횟수
+    t6 = 0
+    while b >= num_money_sorted[6]:
+        b = b - num_money_sorted[6]
+        t6 = t6 + 1 # 인덱스 2의 상품선택횟수
+    t5 = 0
+    while b >= num_money_sorted[5]:
+        b = b - num_money_sorted[5]
+        t5 = t5 + 1 # 인덱스 2의 상품선택횟수
+    t4 = 0
+    while b >= num_money_sorted[4]:
+        b = b - num_money_sorted[4]
+        t4 = t4 + 1 # 인덱스 2의 상품선택횟수
+    t3 = 0
+    while b >= num_money_sorted[3]:
+        b = b - num_money_sorted[3]
+        t3 = t3 + 1 # 인덱스 2의 상품선택횟수
+    t2 = 0
+    while b >= num_money_sorted[2]:
+        b = b - num_money_sorted[2]
+        t2 = t2 + 1 # 인덱스 2의 상품선택횟수
+    t1 = 0
+    while b >= num_money_sorted[1]:
+        b = b - num_money_sorted[1]
+        t1 = t1 + 1 # 인덱스 1의 상품선택횟수
+    t0 = 0
+    while b >= num_money_sorted[0]:
+        b = b - num_money_sorted[0]
+        t0 = t0 + 1 # 인덱스 0의 상품선택횟수
+        
+    price = num_money_sorted[0] * t0 + num_money_sorted[1] * t1 + num_money_sorted[2] * t2 + num_money_sorted[3] * t3 + num_money_sorted[4] * t4 + num_money_sorted[5] * t5 + num_money_sorted[6] * t6 + num_money_sorted[7] * t7 + num_money_sorted[8] * t8
+    stars = num_stars_sorted[0] * t0 + num_stars_sorted[1] * t1 + num_stars_sorted[2] * t2 + num_stars_sorted[3] * t3 + num_stars_sorted[4] * t4 + num_stars_sorted[5] * t5 + num_stars_sorted[6] * t6 + num_stars_sorted[7] * t7 + num_stars_sorted[8] * t8
+    plan = {}
+    for i in range(len(keys_lst)):
+        if num_money_sorted[0] == num_money[i]:
+            plan[f'{i+1}번'] = t0
+        elif num_money_sorted[1] == num_money[i]:
+            plan[f'{i+1}번'] = t1
+        elif num_money_sorted[2] == num_money[i]:
+            plan[f'{i+1}번'] = t2
+        elif num_money_sorted[3] == num_money[i]:
+            plan[f'{i+1}번'] = t3
+        elif num_money_sorted[4] == num_money[i]:
+            plan[f'{i+1}번'] = t4
+        elif num_money_sorted[5] == num_money[i]:
+            plan[f'{i+1}번'] = t5
+        elif num_money_sorted[6] == num_money[i]:
+            plan[f'{i+1}번'] = t6
+        elif num_money_sorted[7] == num_money[i]:
+            plan[f'{i+1}번'] = t7
+        elif num_money_sorted[8] == num_money[i]:
+            plan[f'{i+1}번'] = t8
+            
+    print(f'구매플랜 : {plan} \n 획득스타 : {stars} \n 구매금액 : {price} \n 잔액 : {b}')
