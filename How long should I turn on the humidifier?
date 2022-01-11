@@ -1,0 +1,207 @@
+# 시간당 k(ml)인 가습기
+# 최적 습도를 만드는 데 필요한 시간 계산
+
+saturation = {} # 대기압일 때의 최대수증기량
+
+saturation['60'] = 129.72
+saturation['59'] = 124.21
+saturation['58'] = 118.89
+saturation['57'] = 113.77
+saturation['56'] = 108.83
+saturation['55'] = 104.08
+saturation['54'] = 99.492
+saturation['53'] = 95.084
+saturation['52'] = 90.836
+saturation['51'] = 86.755
+saturation['50'] = 82.823
+saturation['49'] = 79.042
+saturation['48'] = 75.414
+saturation['47'] = 71.925
+saturation['46'] = 68.57
+saturation['45'] = 65.35
+saturation['44'] = 62.259
+saturation['43'] = 59.293
+saturation['42'] = 56.448
+saturation['41'] = 53.718
+saturation['40'] = 51.102
+saturation['39'] = 48.595
+saturation['38'] = 46.193
+saturation['37'] = 43.893
+saturation['36'] = 41.691
+saturation['35'] = 39.583
+saturation['34'] = 37.568
+saturation['33'] = 35.641
+saturation['32'] = 33.799
+saturation['31'] = 32.039
+saturation['30'] = 30.358
+saturation['29'] = 28.756
+saturation['28'] = 27.221
+saturation['27'] = 25.76
+saturation['26'] = 24.366
+saturation['25'] = 23.038
+saturation['24'] = 21.773
+saturation['23'] = 20.568
+saturation['22'] = 19.421
+saturation['21'] = 18.329
+saturation['20'] = 17.291
+saturation['19'] = 15.562
+saturation['18'] = 15.366
+saturation['17'] = 14.475
+saturation['16'] = 13.629
+saturation['15'] = 12.827
+saturation['14'] = 12.065
+saturation['13'] = 11.343
+saturation['12'] = 10.659
+saturation['11'] = 10.011
+saturation['10'] = 9.3977
+saturation['9'] = 8.8171
+saturation['8'] = 8.2686
+saturation['7'] = 7.7494
+saturation['6'] = 7.2589
+saturation['5'] = 6.7956
+saturation['4'] = 6.3588
+saturation['3'] = 5.9466
+saturation['2'] = 5.5579
+saturation['1'] = 5.1917
+saturation['0'] = 4.8467
+saturation['-1'] = 4.4777
+saturation['-2'] = 4.1352
+saturation['-3'] = 3.8187
+saturation['-4'] = 3.5199
+saturation['-5'] = 3.2444
+saturation['-6'] = 2.9888
+saturation['-7'] = 2.7516
+saturation['-8'] = 2.5314
+saturation['-9'] = 2.3267
+saturation['-10'] = 2.1379
+saturation['-11'] = 1.9632
+saturation['-12'] = 1.8014
+saturation['-13'] = 1.6517
+saturation['-14'] = 1.5133
+saturation['-15'] = 1.3858
+saturation['-16'] = 1.2679
+saturation['-17'] = 1.1596
+saturation['-18'] = 1.0595
+saturation['-19'] = 0.9673
+saturation['-20'] = 0.8821
+saturation['-21'] = 0.8044
+saturation['-22'] = 0.7328
+saturation['-23'] = 0.667
+saturation['-24'] = 0.6067
+saturation['-25'] = 0.5514
+saturation['-26'] = 0.5008
+saturation['-27'] = 0.4544
+saturation['-28'] = 0.412
+saturation['-29'] = 0.3733
+saturation['-30'] = 0.3379
+saturation['-31'] = 0.3056
+saturation['-32'] = 0.2762
+saturation['-33'] = 0.2493
+saturation['-34'] = 0.2249
+saturation['-35'] = 0.2027
+saturation['-36'] = 0.1826
+saturation['-37'] = 0.1642
+saturation['-38'] = 0.1476
+saturation['-39'] = 0.1326
+saturation['-40'] = 0.1189
+saturation['-41'] = 0.1066
+saturation['-42'] = 0.0954
+saturation['-43'] = 0.0854
+saturation['-44'] = 0.0763
+saturation['-45'] = 0.0682
+saturation['-46'] = 0.0608
+saturation['-47'] = 0.0542
+saturation['-48'] = 0.0482
+saturation['-49'] = 0.0429
+saturation['-50'] = 0.0381
+saturation['-51'] = 0.0338
+saturation['-52'] = 0.0299
+saturation['-53'] = 0.0265
+saturation['-54'] = 0.0234
+saturation['-55'] = 0.0207
+saturation['-56'] = 0.0183
+saturation['-57'] = 0.0161
+saturation['-58'] = 0.0142
+saturation['-59'] = 0.0125
+saturation['-60'] = 0.0109
+
+volume = int(input('실내공간의 부피(m³) : '))
+temp = int(input('현재 온도(℃) : '))
+humid_now = int(input('현재 습도(%) : '))
+humidifier_spec = int(input('시간당 가습량(ml/h) : '))
+
+def 가습시간계산기():
+    
+    if temp <= 15:
+        if humid_now <= 70:
+            vapor_need = saturation[f'{temp}']*(70 - humid_now)/100 # 필요수증기량
+            time = vapor_need*volume*3600/humidifier_spec
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+
+    elif temp > 15 and temp < 18:
+        if humid_now <= 65:
+            vapor_need = saturation[f'{temp}']*(65 - humid_now)/100 # 필요수증기량
+            time = round(vapor_need*volume*3600/humidifier_spec, 2)
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+
+    elif temp >= 18 and temp < 21:
+        if humid_now <= 60:
+            vapor_need = saturation[f'{temp}']*(60 - humid_now)/100 # 필요수증기량
+            time = round(vapor_need*volume*3600/humidifier_spec, 2)
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+
+    elif temp >= 21 and temp < 24:
+        if humid_now <= 50:
+            vapor_need = saturation[f'{temp}']*(50 - humid_now)/100 # 필요수증기량
+            time = round(vapor_need*volume*3600/humidifier_spec, 2)
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+
+    elif temp >= 24 and temp <= 26:
+        if humid_now <= 40:
+            vapor_need = saturation[f'{temp}']*(40 - humid_now)/100 # 필요수증기량
+            time = round(vapor_need*volume*3600/humidifier_spec, 2)
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+
+    else:
+        if humid_now <= 35:
+            vapor_need = saturation[f'{temp}']*(35 - humid_now)/100 # 필요수증기량
+            time = round(vapor_need*volume*3600/humidifier_spec, 2)
+            hours = time//3600
+            ss = time - (hours * 3600)
+            mu = ss//60
+            t = round(vapor_need*volume*humidifier_spec/humidifier_spec, 2)
+            print(f'>>>최적 습도까지 약 {hours}시간 {mu}분 소요됩니다. \n >>>필요한 물의 양은 약 {t}ml입니다.')
+        else:
+            print('습도가 높은 상태이거나 이미 적정 습도입니다.')
+        
+가습시간계산기()
