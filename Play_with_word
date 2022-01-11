@@ -1,0 +1,26 @@
+# write a function play_word
+# it takes the first letter of a word,
+# puts it at the end,
+# and appends "ay"
+# The only exception is if
+# the first letter is a vowel ['a','e','i','o','u'], in which case
+# we keep the first letter as it is and just append "hay" to the end.
+
+print('='*40)
+
+i = 0
+while i < 2:
+
+    a = input('word : ')
+
+    def jumbling_word(a):
+        if a[0] in ['a', 'e', 'i', 'o', 'u']:
+            new_a = a + 'ay'
+            print(f'>>> New word : {new_a}')
+                
+        else:
+            new_a = a.replace(a[0], a[-1]) + a[0] + 'ay'
+            print(f'>>> New word : {new_a[1:]}')
+
+    jumbling_word(a)
+    i += 1
