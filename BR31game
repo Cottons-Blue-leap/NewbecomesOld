@@ -15,7 +15,7 @@ def stonegame(k, l):
                 T = T * -1
             else:
                 print(f'***1개에서 {l}개까지만 가져가셈***')
-                break
+                pass
                 
         if k <= 0:
             print('플레이어 A가 이겼따')
@@ -29,7 +29,7 @@ def stonegame(k, l):
                 T = T * -1
             else:
                 print(f'***1개에서 {l}개까지만 가져가셈***')
-                break
+                pass
                 
         if k <= 0:
             print('플레이어 B가 이겼따')
