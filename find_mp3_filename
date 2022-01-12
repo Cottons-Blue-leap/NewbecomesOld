@@ -1,0 +1,25 @@
+# 폴더 경로를 입력하면 불러온 해당 폴더에서 mp3확장자를 지닌 파일명만을 추출
+# .mp3를 제거한 파일명 리스트를 출력
+
+def find_mp3_filename(path):
+
+    import os
+
+    file_lst = os.listdir(path)
+    file_lst_mp3 = [file for file in file_lst if file.endswith(".mp3")]
+
+    file_name = []
+    for file in file_lst_mp3:
+        if file.count(".") == 1:
+            name = file.split('.')[0]
+            file_name.append(name)
+        else:
+            for k in range(len(file)-1,0,-1):
+                if file[k] == '.':
+                    file_name.append(file[:k])
+                    break
+
+    print(file_name)
+
+a = input('폴더 경로 : ')
+find_mp3_filename(a)
