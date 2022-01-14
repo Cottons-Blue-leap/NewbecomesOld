@@ -1,0 +1,12 @@
+# 웹에서 검색결과 불러오기
+
+from selenium import webdriver  # selenium 프레임 워크에서 webdriver 가져오기
+url = 'https://www.tjmedia.com/tjsong/song_search.asp'        # 접속할 웹 사이트 주소 (TJ노래검색)
+driver = webdriver.Chrome('C:/Users/wlsxo/Documents/대학교/파이썬/chromedriver_win32/chromedriver')  # 크롬 드라이버로 크롬 켜기
+driver.get(url)                 # 저장한 url 주소로 이동
+
+data = driver.find_element_by_class_name('search_input2.sort_t') # TJ번호찾기에 ''를 입력
+data.clear()
+data.send_keys('All of me')
+driver.find_element_by_class_name('sort_m').click() # 단일검색 체크
+driver.find_element_by_class_name('btn').click() # '검색'버튼 체크
