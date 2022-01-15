@@ -1,0 +1,26 @@
+# 그냥 전자시계
+
+from tkinter import Label, Tk
+import time
+
+app_window = Tk()
+app_window.title("그냥 시계")
+app_window.geometry("350x125+100+100")
+app_window.resizable(0,0)
+
+text_font1=("Consolas", 50, "bold")
+background1 = "#000000"
+foreground1 = "#FFFFFF"
+border_width1 = 25
+
+label1 = Label(app_window, font=text_font1, bg=background1, fg=foreground1, bd=border_width1)
+label1.grid(row=0, column=0)
+
+def digital_clock():
+    time_live = time.strftime("%H:%M:%S")
+    label1.config(text=time_live)
+    label1.after(200, digital_clock)
+
+digital_clock()
+
+app_window.mainloop()
