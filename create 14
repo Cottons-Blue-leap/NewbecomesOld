@@ -1,0 +1,24 @@
+# =SUM('2월'!G61,'2월'!M61,'2월'!S61,'2월'!Y61,'2월'!AE61,'2월'!AK61,'2월'!AQ61,'2월'!AW61,'2월'!BC61,'2월'!BI61,'2월'!BO61,'2월'!BU61,'2월'!CA61,'2월'!CG61,'2월'!CM61,'2월'!CS61,'2월'!CY61,'2월'!DE61,'2월'!DK61,'2월'!DQ61,'2월'!DW61,'2월'!EC61,'2월'!EI61,'2월'!EO61,'2월'!EU61,'2월'!FA61,'2월'!FG61,'2월'!FM61,'2월'!FS61,'2월'!FY61,'2월'!GE61
+# 를 입력하면 61이었던 숫자가 63으로 바뀐 게 48개가 나온다...
+# 왜 만들었지?
+
+def changeNum(Excel_text):
+
+    row_list = ['61']
+    for j in range(8):
+        for i in range(6):
+            row_list.append(str((61+14*j)+i*2)) # 숫자의 규칙성         
+
+    for k in range(len(row_list)):
+        if k < (len(row_list)-1):
+            Excel_text = Excel_text.replace(str(row_list[k]), str(row_list[k+1]))
+            print(f'인덱스 {k}\n{Excel_text}', end='\n\n')
+            
+        else:
+            Excel_text = Excel_text.replace('165', '167')
+            Excel_text1 = Excel_text.replace('167', '169')
+            print(f'인덱스 47\n{Excel_text}', end ='\n\n')
+            print(f'인덱스 48\n{Excel_text1}')
+            
+Excel_text = input()
+changeNum(Excel_text)
