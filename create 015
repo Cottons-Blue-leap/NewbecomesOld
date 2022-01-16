@@ -1,0 +1,19 @@
+# If you enter the current year, it will print out your current age.
+
+
+def KoreanAge_Calculator_forFam(present_year):
+    family_list = input('family_list(ex. Father Mother Sister Brother Me)\n>>> ').split()
+    print(f'We put {len(family_list)} values in family_list.\n\nEnter the same amount of input in birthyear_list.')
+    birthyear_list = map(int, input('birthyear_list(ex. 1967 1969 1992 1998 2002)\n>>> ').split())
+
+    family_birthyear_dict = dict(zip(family_list, birthyear_list))
+    family_age_dict = family_birthyear_dict.copy()
+
+    for i in family_list:
+        family_age_dict[i] = present_year - family_birthyear_dict[i] + 1
+
+        
+    print(family_age_dict) 
+
+present_year = int(input('Enter the current year. : '))
+KoreanAge_Calculator_forFam(present_year)
