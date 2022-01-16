@@ -1,0 +1,24 @@
+# INPUT : Score for subjects.
+# If The Average Score >= 80, You get 'Pass'
+# However, if the input score is out of the 0-100 section, output "invalid score input".
+
+import sys
+
+def determine_PF(score_list):
+    
+    for i in score_list:
+        if 0 <= i <= 100:
+            pass
+        else:
+            print('invalid score input')
+            sys.exit()
+    
+    score_avg = sum(score_list)/len(score_list)
+    if score_avg >= 80:
+        print('Pass')
+    else:
+        print('Fail')
+
+
+score_list = list(map(int, input('Please Input Scores : ').split()))
+determine_PF(score_list)
