@@ -1,0 +1,33 @@
+import time
+
+Novel_for_typing = """애국가
+1. 동해물과 백두산이 마르고 닳도록
+하느님이 보우하사 우리나라 만세
+무궁화 삼천리 화려강산
+대한사람 대한으로 길이 보전하세.
+2. 남산 위에 저 소나무 철갑을 두른 듯
+바람 서리 불변함은 우리 기상일세
+무궁화 삼천리 화려강산
+대한사람 대한으로 길이 보전하세.
+3. 가을 하늘 공활한데 높고 구름 없이
+밝은 달은 우리가슴 일편 단심일세
+무궁화 삼천리 화려강산
+대한사람 대한으로 길이 보전하세.
+4. 이 기상과 이 맘으로 충성을 다하여
+괴로우나 즐거우나 나라 사랑하세
+무궁화 삼천리 화려강산
+대한사람 대한으로 길이 보전하세.
+"""
+
+start = time.time()
+
+paragraph = Novel_for_typing.split('\n')
+for i in range(len(paragraph)-1):
+    sentence_typed = input(f'{paragraph[i]}\n>>> ')
+    while sentence_typed != paragraph[i]:
+        print('!!!잘못된 입력입니다. 다시 입력해 주세요!!!\n')
+        sentence_typed = input(f'{paragraph[i]}\n>>> ')
+    print('\n')
+
+processTime = time.time() - start
+print(f'"나의 사랑 한글날"을 치는 데 걸린 시간 \n: {processTime:.3f}초\n: 평균', int(len(Novel_for_typing)*60/processTime), '타')
