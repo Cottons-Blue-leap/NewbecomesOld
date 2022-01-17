@@ -1,0 +1,56 @@
+# INPUT : 범위와 그 범위 내의 임의의 수
+# OUTPUT : 컴퓨터의 UP DOWN 과정
+# ex) 범위(1~100) >>> 50 UP >>> 75 down >>> 63 UP >>> 69 DOWN >>> 66 UP >>> 68 DOWN >>> 67 YES!!!
+
+import random
+import time
+
+def play_UpDown():
+     
+    while 1: # 범위 지정해주기
+        max_num = float(input('최대 범위를 설정하세요(1 이상의 실수 입력_소수점은 버려집니다)\n>>> '))
+        if float(max_num) >= 1:
+            break
+        else:
+            print('좀..정상적인 수를 입력하세요!!\n')
+            
+    while 1: # 범위 지정해주기
+        my_num = float(input('1부터 지정 범위까지의 실수를 입력하세요(소수점은 버려집니다)\n>>> '))
+        if 1 <= float(my_num) <= float(max_num):
+            break
+        else:
+            print('정상적인 수를 입력하시라니까?!!!\n')
+            
+    input('정직한 컴퓨터에게 게임을 시키시겠습니까?\n(Enter 입력)')
+    
+    start = time.time()
+    
+    count = 0
+    my_num = int(my_num)
+    min_num = 1
+    max_num = int(max_num)
+    
+    while 1:
+    
+        count += 1
+
+        com_num = max_num - int((max_num - min_num)/2)
+        print(f'{count}회 시도 : {com_num} 를 뽑았습니다')
+        
+        if my_num != com_num:
+            if my_num < com_num:
+                max_num = com_num
+                print('DOWN\n')
+            elif my_num > com_num:
+                min_num = com_num
+                print('UP\n')
+                
+        else:
+            print(f'!!!Computer did it!!!\n총 시도 횟수 : {count}')
+            playtime = time.time() - start
+            print(f'계산시간 : {playtime:.8f}초')
+            break
+            
+
+
+play_UpDown()
