@@ -7,16 +7,16 @@
 
 import random
 
-max_num = int(input('최대 범위를 설정하세요 : '))
+max_num = int(input('Set the Maximum range. : '))
 num_lst = [a for a in range(0, max_num+1)]
 com_num = random.choice(num_lst)
 
-start = input('게임을 시작하시겠습니까?\n(Enter 입력)')
+start = input('Start the Game?\n(Press Enter)')
 count = 0
 while 1:
 
     count += 1
-    your_num = int(input(f'{count}번째 시도 : '))
+    your_num = int(input(f'{count} try : '))
     
     if your_num != com_num:
         if your_num > com_num:
@@ -25,6 +25,6 @@ while 1:
             print('UP')
             
     else:
-        print(f'!!!YOU WIN!!!\n총 시도 횟수 : {count}')
+        print(f'!!!YOU WIN!!!\nTotal Try : {count}')
         break
         
