@@ -1,0 +1,60 @@
+# 나는 불규칙적인 수면패턴을 바꿔보고자 최근 룰을 정하고 이를 실천하고자 한다.
+# 4가지 룰을 정했으나 스스로를 믿지 못한 태규는 해당 룰을
+# 각 시간마다 휴대폰에 문자 메시지를 보내는 프로그램을 짜고자 한다.
+# 룰1. 22:00 <지금부터 야식은 삼가해 주시길 바랍니다>
+# 룰2. 23:30 <일기 및 전자플래너 쓸 시간입니다>
+# 룰3. 00:00 <침대에 누우실 시간입니다>
+# 룰4. 00:30 <휴대폰을 손에서 놓고 눈을 감으세요>
+# 조건. 문자 메시지 전송은 Twilio를 이용
+
+
+from twilio.rest import Client
+import time
+import schedule
+
+
+account_sid = ''
+auth_token = ''
+client = Client(account_sid, auth_token)
+
+
+def quitfood():
+    message = client.messages.create(
+        to="+",
+        from_="+",
+        body="<지금부터 야식은 삼가해 주시길 바랍니다>\n<미래의 내가 보내는 메시지>"
+    )
+    print(message.sid)
+
+def wrapitup():
+    message = client.messages.create(
+        to="+",
+        from_="+",
+        body="<일기 및 전자플래너 쓸 시간입니다>\n<미래의 내가 보내는 메시지>"
+    )
+    print(message.sid)
+        
+def backOnbed():
+    message = client.messages.create(
+        to="+",
+        from_="+",
+        body="<침대에 누우실 시간입니다>\n<미래의 내가 보내는 메시지>"
+    )
+    print(message.sid)
+        
+def closeEyes():        
+    message = client.messages.create(
+        to="+",
+        from_="+",
+        body="<휴대폰을 손에서 놓고 눈을 감으세요>\n<미래의 내가 보내는 메시지>"
+    )
+    print(message.sid)
+
+schedule.every().day.at("22:00").do(quitfood)
+schedule.every().day.at("23:30").do(wrapitup)
+schedule.every().day.at("00:00").do(backOnbed)
+schedule.every().day.at("00:30").do(closeEyes)
+    
+while True:
+    schedule.run_pending()
+    time.sleep(1)
