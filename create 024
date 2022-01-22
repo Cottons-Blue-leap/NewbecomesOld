@@ -1,0 +1,17 @@
+my_str = input()
+croatian = 'c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z='
+
+count = 0
+for i in croatian:
+    if my_str.count(i):
+        if my_str.count(i) >= 2:
+            count += my_str.count(i)
+        else:
+            count += 1
+        my_str = my_str.replace(i, " ")
+
+print(count+len(my_str.replace(' ','')))
+
+
+
+    
