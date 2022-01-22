@@ -65,7 +65,7 @@ def minesweeper():
     
     string = ''.join(str(i) for i in answer)
     for i in range(row):
-        my_str = string[i*3:col*(i+1)]
+        my_str = string[i*col:col*(i+1)]
         print(my_str)
     
 minesweeper()
