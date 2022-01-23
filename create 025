@@ -1,0 +1,76 @@
+
+Bang = {'햎박': {'스타': 3000, '요금': 11000},
+        '세트': {'스타': 1960, '요금': 22000},
+        '스타A': {'스타': 60, '요금': 1100},
+        '스타B': {'스타': 360, '요금': 4500},
+        '스타C': {'스타': 760, '요금': 9000},
+        '스타D': {'스타': 1300, '요금': 15000},
+        '스타E': {'스타': 2650, '요금': 30500},
+        '스타F': {'스타': 4200, '요금': 47500},
+        '스타G': {'스타': 8500, '요금': 95000}
+        }
+
+m = int(input('총알 얼마? : ')) # 가지고 있는 총알
+plan = {i:None for i in Bang.keys()}
+star = 0
+g = 0
+f = 0
+e = 0
+d = 0
+c = 0
+b = 0
+a = 0
+while m >= 1100:
+    if m >= 11000 and plan['햎박'] != 1:
+        m -= 11000
+        star += 3000
+        plan.update(햎박=1)
+    elif m >= 95000:
+        m -= 95000
+        star += 8500
+        g += 1
+        plan.update(스타G=g)
+    elif m >= 22000 and plan['세트'] != 1:
+        m -= 22000
+        star += 1960
+        plan.update(세트=1)
+    elif m >= 47500:
+        m -= 47500
+        star += 4200
+        f += 1
+        plan.update(스타F=f)
+        continue
+    elif m >= 30500:
+        m -= 30500
+        star += 2650
+        e += 1
+        plan.update(스타E=e)
+        continue
+    elif m >= 15000:
+        m -= 15000
+        star += 1300
+        d += 1
+        plan.update(스타D=d)
+        continue
+    elif m >= 9000:
+        m -= 9000
+        star += 760
+        c += 1
+        plan.update(스타C=c)
+        continue
+    elif m >= 4500:
+        m -= 4500
+        star += 360
+        b += 1
+        plan.update(스타B=b)
+        continue
+    elif m >= 1100:
+        m -= 1100
+        star += 60
+        a += 1
+        plan.update(스타A=a)
+
+  
+
+print(f'{plan}\n>>>잔돈 : {m}원 / 구매한 스타 : 총 {star}개')
+    
