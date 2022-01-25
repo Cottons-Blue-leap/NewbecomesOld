@@ -1,0 +1,33 @@
+import sys
+# 미로 상자의 구조 입력
+house=[sys.stdin.readline().split() for i in range(10)]
+
+
+# 입력된 구조에서 먹이의 위치 찾기
+for i in range(10):
+    for j in range(10):
+        if house[i][j]=='2':
+            x,y=i,j
+            
+# 개미가 먹이까지 가는 최단 경로 구하기
+
+a=1
+b=1 # 개미집의 위치
+a_1=x-a # 개미집에서 먹이 좌표까지 움직이는 세로거리
+b_1=y-b # 개미집에서 먹이 좌표까지 움직이는 가로거리
+house[a][b]='9'
+while a!=a_1 or b!=b_1: # 먹이 좌표를 찾을 때까지 반복
+    if house[a][b+1]!='1' and b < b_1+1: # 오른쪽이 뚫림
+        house[a][b+1]='9'
+        b+=1
+    elif house[a+1][b]!='1' and a < a_1+1: # 아래쪽이 뚫림
+        house[a+1][b]='9'
+        a+=1
+    else:
+        break
+
+for i in range(10):
+    for j in range(10):
+        print(house[i][j], end=' ')
+    print()
+    
