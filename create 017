@@ -30,4 +30,4 @@ for i in range(len(paragraph)-1):
     print('\n')
 
 processTime = time.time() - start
-print(f'"나의 사랑 한글날"을 치는 데 걸린 시간 \n: {processTime:.3f}초\n: 평균', int(len(Novel_for_typing)*60/processTime), '타')
+print(f'"애국가"를 치는 데 걸린 시간 \n: {processTime:.3f}초\n: 평균', int(len(Novel_for_typing)*60/processTime), '타')
